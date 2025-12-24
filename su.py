@@ -31,7 +31,7 @@ video_arr = [
 if 'ind' not in st.session_state:
     st.session_state.ind = 0
 
-# 动态显示当前剧集标题
+# 显示当前剧集标题
 st.title(video_arr[st.session_state.ind]['title'])
 
 # 播放当前视频
@@ -41,15 +41,18 @@ st.video(video_arr[st.session_state.ind]['url'])
 def playVideo(index):
     st.session_state.ind = index
 
-# 创建横向按钮：使用 columns
-cols = st.columns(len(video_arr))  # 创建与视频数量相同的列
-
-for i, col in enumerate(cols):
-    with col:
-        st.button(
-            f"第{i+1}集",
-            key=f"btn_{i}",
-            on_click=playVideo,
-            args=(i,),
-            use_container_width=True  # 让按钮填满列宽，更美观
-        )
+# === 一行三集布局 ===
+n_cols = 3
+for i in range(0, len(video_arr), n_cols):
+    cols = st.columns(n_cols)
+    for j in range(n_cols):
+        idx = i + j
+        if idx < len(video_arr):
+            with cols[j]:
+                st.button(
+                    f"第{idx + 1}集",
+                    key=f"btn_{idx}",
+                    on_click=playVideo,
+                    args=(idx,),
+                    use_container_width=True
+                )
