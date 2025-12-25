@@ -72,9 +72,9 @@ with col2:
     # 信息展示区域
     st.markdown("---")
     if name:
-        st.markdown(f"<h3 style='color: white;'>{name}</h3>", unsafe_allow_html=True)
+        st.markdown(f"<h3 style='color: black;'>{name}</h3>", unsafe_allow_html=True)
     else:
-        st.markdown("<h3 style='color: white;'>姓名未填写</h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='color: black;'>姓名未填写</h3>", unsafe_allow_html=True)
     
     # ========== 头像预览 - 放在职位上方 ==========
     if uploaded_file is not None:
