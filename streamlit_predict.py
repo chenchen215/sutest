@@ -71,10 +71,24 @@ elif nav_option == "预测医疗费用":
             region_northeast, region_southeast, region_northwest, region_southwest
         ]
 
-        # 加载模型并预测
-        with open('rfr_model.pkl', 'rb') as f:
-            rfr_model = pickle.load(f)
-        format_data_df = pd.DataFrame([format_data], columns=rfr_model.feature_names_in_)
-        predict_result = rfr_model.predict(format_data_df)[0]
+        # 加载模型并预测（添加异常处理，避免应用崩溃）
+        try:
+            with open('rfr_model.pkl', 'rb') as f:
+                rfr_model = pickle.load(f)
+            
+            # 构造DataFrame并预测
+            format_data_df = pd.DataFrame([format_data], columns=rfr_model.feature_names_in_)
+            predict_result = rfr_model.predict(format_data_df)[0]
+            
+            # 显示预测结果
+            st.success(f'根据您输入的数据，预测该客户的医疗费用是：{round(predict_result, 2)}')
         
-        st.write('根据您输入的数据，预测该客户的医疗费用是：', round(predict_result, 2))
+        except FileNotFoundError:
+            # 处理模型文件不存在的情况
+            st.error("错误：未找到rfr_model.pkl模型文件，请确认文件已放在当前目录下！")
+        except pickle.UnpicklingError:
+            # 处理模型文件损坏的情况
+            st.error("错误：rfr_model.pkl模型文件损坏或格式不正确，无法加载！")
+        except Exception as e:
+            # 处理其他未知异常
+            st.error(f"未知错误：{str(e)}")
