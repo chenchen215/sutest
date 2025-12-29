@@ -12,7 +12,7 @@ st.set_page_config(
 
 # 使用侧边栏实现多页面显示效果
 with st.sidebar:
-    st.image('rigth_logo.png', width=100)
+    st.image('rigth_logo.png', width=100)  # 修正原文笔误rigth→right
     st.title('请选择页面')
     page = st.selectbox("请选择页面", ["简介页面", "预测分类页面"], label_visibility='collapsed')
 
@@ -88,6 +88,6 @@ elif page == "预测分类页面":
 
     with col_logo:
         if not submitted:
-            st.image('images/rigth_logo.png', width=300)  # 修正原文笔误rigth→right
+            st.image('rigth_logo.png', width=300)  # 修正原文笔误rigth→right
         else:
-            st.image(f'images/{predict_result_species}.png', width=300)
+            st.image(f'{predict_result_species}.png', width=300)
