@@ -12,7 +12,7 @@ st.set_page_config(
 
 # 使用侧边栏实现多页面显示效果
 with st.sidebar:
-    st.image('images/rigth_logo.png', width=100)  # 修正原文笔误rigth→right
+    st.image('rigth_logo.png', width=100)
     st.title('请选择页面')
     page = st.selectbox("请选择页面", ["简介页面", "预测分类页面"], label_visibility='collapsed')
 
@@ -25,7 +25,7 @@ if page == "简介页面":
     该数据集记录了 344 行观测数据，包含 3 个不同物种的企鹅：阿德利企鹅、巴布亚企鹅和帽带企鹅的各种信息。
     """)
     st.header('三种企鹅的卡通图像')
-    st.image('images/penguins.png')
+    st.image('penguins.png')
 
 elif page == "预测分类页面":
     st.header("预测企鹅分类")
